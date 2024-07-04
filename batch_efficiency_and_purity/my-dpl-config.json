@@ -226,6 +226,23 @@
         "enableTOFParams": "false"
     },
     "pid-ml-batch-eff-and-pur-producer": {
+        "detector": "2",
+        "pids": {
+            "values": [
+                "211",
+                "321",
+                "2212",
+                "-211",
+                "-321",
+                "-2212"
+            ]
+        },
+        "ccdb-path": "Users\/m\/mkabus\/PIDML",
+        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
+        "use-ccdb": "false",
+        "local-path": "\/home\/mytkom\/pdi\/onnx\/Proposed",
+        "use-fixed-timestamp": "false",
+        "timestamp": "1524176895000"
     },
     "internal-dpl-aod-writer": "",
     "internal-dpl-injected-dummy-sink": ""

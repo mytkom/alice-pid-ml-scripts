@@ -9,6 +9,7 @@
 #include <TVirtualPad.h>
 
 #define PT_TITLE "#it{p}_{T} (GeV/#it{c})"
+#define MAX_PT 5.0f
 
 typedef struct MarkerStyle {
   int style;
@@ -84,34 +85,34 @@ void efficiency_and_purity(TString analysisFilePath, TString outputImageFilename
   phReconstructionTrackEff->Sumw2();
   phReconstructionTrackEff->Divide(mcData.GeneratedHist);
 
-  eap_draw_hist(phReconstructionTrackEff, contextStyle, contextColor, "Reconstruction Efficiency", PT_TITLE, "Reconstruction Efficiency", 0.0, 3.1, 0.0, 1.0, "he,same");
+  eap_draw_hist(phReconstructionTrackEff, contextStyle, contextColor, "Reconstruction Efficiency", PT_TITLE, "Reconstruction Efficiency", 0.0, MAX_PT, 0.0, 1.0, "he,same");
 
   TH2F *pHistAcceptedTOFNSigma = (TH2F *)f->Get("pid-ml-eff-and-pur-producer/hPtTOFNSigma");
   canvas->cd(5);
-  eap_draw_hist(pHistAcceptedTOFNSigma, contextStyle, contextColor, "Traditional method accepted #it{n}_{#sigma , TOF}", PT_TITLE, "#it{n}_{#sigma , TOF}", 0.0, 3.1, -5.0, 5.0, "colz");
+  eap_draw_hist(pHistAcceptedTOFNSigma, contextStyle, contextColor, "Traditional method accepted #it{n}_{#sigma , TOF}", PT_TITLE, "#it{n}_{#sigma , TOF}", 0.0, MAX_PT, -5.0, 5.0, "colz");
 
   TH2F *pHistAcceptedTPCNSigma = (TH2F *)f->Get("pid-ml-eff-and-pur-producer/hPtTPCNSigma");
   canvas->cd(6);
-  eap_draw_hist(pHistAcceptedTPCNSigma, contextStyle, contextColor, "Traditional method accepted #it{n}_{#sigma , TPC}", PT_TITLE, "#it{n}_{#sigma , TPC}", 0.0, 3.1, -5.0, 5.0, "colz");
+  eap_draw_hist(pHistAcceptedTPCNSigma, contextStyle, contextColor, "Traditional method accepted #it{n}_{#sigma , TPC}", PT_TITLE, "#it{n}_{#sigma , TPC}", 0.0, MAX_PT, -5.0, 5.0, "colz");
   gPad->SetLogz();
 
   TH2F *pHistTOFNSigma = (TH2F *)f->Get("pid-ml-eff-and-pur-producer/full/hPtTOFNSigma");
   canvas->cd(7);
-  eap_draw_hist(pHistTOFNSigma, contextStyle, contextColor, "TOF #it{n}_{#sigma} MCParticles with wanted PdgCode", PT_TITLE, "#it{n}_{#sigma , TOF}", 0.0, 3.1, -5.0, 5.0, "colz");
+  eap_draw_hist(pHistTOFNSigma, contextStyle, contextColor, "TOF #it{n}_{#sigma} MCParticles with wanted PdgCode", PT_TITLE, "#it{n}_{#sigma , TOF}", 0.0, MAX_PT, -5.0, 5.0, "colz");
 
   TH2F *pHistTPCNSigma = (TH2F *)f->Get("pid-ml-eff-and-pur-producer/full/hPtTPCNSigma");
   canvas->cd(8);
-  eap_draw_hist(pHistTPCNSigma, contextStyle, contextColor, "TPC #it{n}_{#sigma} MCParticles with wanted PdgCode", PT_TITLE, "#it{n}_{#sigma , TPC}", 0.0, 3.1, -5.0, 5.0, "colz");
+  eap_draw_hist(pHistTPCNSigma, contextStyle, contextColor, "TPC #it{n}_{#sigma} MCParticles with wanted PdgCode", PT_TITLE, "#it{n}_{#sigma , TPC}", 0.0, MAX_PT, -5.0, 5.0, "colz");
   gPad->SetLogz();
 
   TH2F *pHistTOFBeta = (TH2F *)f->Get("pid-ml-eff-and-pur-producer/full/hPtTOFBeta");
   canvas->cd(9);
-  eap_draw_hist(pHistTOFBeta, contextStyle, contextColor, "TOF #beta for all tracked particles", PT_TITLE, "#beta", 0.0, 3.1, 0.0, 1.2, "colz");
+  eap_draw_hist(pHistTOFBeta, contextStyle, contextColor, "TOF #beta for all tracked particles", PT_TITLE, "#beta", 0.0, MAX_PT, 0.0, 1.2, "colz");
   gPad->SetLogz();
 
   TH2F *pHistTPCSignal = (TH2F *)f->Get("pid-ml-eff-and-pur-producer/full/hPtTPCSignal");
   canvas->cd(10);
-  eap_draw_hist(pHistTPCSignal, contextStyle, contextColor, "TPC Signal for all tracked particles", PT_TITLE, "#it{dE}/#it{dx}", 0.0, 3.1, 20.0, 120.0, "colz");
+  eap_draw_hist(pHistTPCSignal, contextStyle, contextColor, "TPC Signal for all tracked particles", PT_TITLE, "#it{dE}/#it{dx}", 0.0, MAX_PT, 20.0, 120.0, "colz");
   gPad->SetLogz();
 
   canvas->cd(2);
@@ -127,7 +128,7 @@ void eap_calculate_efficencies_and_purity(const PidMethod* pidMethod, const Mont
   phFullTrackEff->Sumw2();
   phFullTrackEff->Divide(mcData->GeneratedHist);
 
-  eap_draw_hist(phFullTrackEff, pidMethod->marker.style, pidMethod->marker.color, "Full efficiency", PT_TITLE, "Full efficiency", 0.0, 3.1, 0.0, 1.0, "he,same");
+  eap_draw_hist(phFullTrackEff, pidMethod->marker.style, pidMethod->marker.color, "Full efficiency", PT_TITLE, "Full efficiency", 0.0, MAX_PT, 0.0, 1.0, "he,same");
 
   // PID Efficiency
   canvas->cd(2);
@@ -136,7 +137,7 @@ void eap_calculate_efficencies_and_purity(const PidMethod* pidMethod, const Mont
   phPidTrackEff->Sumw2();
   phPidTrackEff->Divide(mcData->TrackedHist);
 
-  eap_draw_hist(phPidTrackEff, pidMethod->marker.style, pidMethod->marker.color, "PID efficiency", PT_TITLE, "PID efficiency", 0.0, 3.1, 0.0, 1.0, "he,same");
+  eap_draw_hist(phPidTrackEff, pidMethod->marker.style, pidMethod->marker.color, "PID efficiency", PT_TITLE, "PID efficiency", 0.0, MAX_PT, 0.0, 1.0, "he,same");
 
   // Purity
   canvas->cd(4);
@@ -146,7 +147,7 @@ void eap_calculate_efficencies_and_purity(const PidMethod* pidMethod, const Mont
   hPurity->Divide(pidMethod->PosIdenHist);
   hPurity->Sumw2();
 
-  eap_draw_hist(hPurity, pidMethod->marker.style, pidMethod->marker.color, "Purity", PT_TITLE, "Purity", 0.0, 3.1, 0.0, 1.0, "he,same");
+  eap_draw_hist(hPurity, pidMethod->marker.style, pidMethod->marker.color, "Purity", PT_TITLE, "Purity", 0.0, MAX_PT, 0.0, 1.0, "he,same");
 
   // Add to legend
   pleg->AddEntry(hPurity, pidMethod->MethodLabel);
