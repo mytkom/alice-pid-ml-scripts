@@ -70,15 +70,15 @@ else
 fi
 echo "Target local path: $path_local"
 echo "Number of files: $nfiles"
-MsgWarn "\nDo you wish to continue? (y/n)"
-while true; do
-  read -r -p "Answer: " yn
-  case $yn in
-    [y] ) echo "Proceeding"; break;;
-    [n] ) echo "Aborting";  [ "$LISTEXT" -eq 0 ] && rm -f "$inputlist"; exit 0;;
-    * ) echo "Please answer y or n.";;
-  esac
-done
+#MsgWarn "\nDo you wish to continue? (y/n)"
+#while true; do
+#  read -r -p "Answer: " yn
+#  case $yn in
+#    [y] ) echo "Proceeding"; break;;
+#    [n] ) echo "Aborting";  [ "$LISTEXT" -eq 0 ] && rm -f "$inputlist"; exit 0;;
+#    * ) echo "Please answer y or n.";;
+#  esac
+#done
 
 # Process list of files.
 speed=10 # number of download threads started per second
