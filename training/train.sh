@@ -20,6 +20,8 @@ $PIDML_TRAINING_DIR/scripts/preprocessing.py $PIDML_TRAINING_DIR/data/preprocess
 $PIDML_TRAINING_DIR/scripts/prepare_data.py $PIDML_TRAINING_DIR/data/$CSV_FILE -o $PIDML_TRAINING_DIR/data/processed
 # training
 $PIDML_TRAINING_DIR/scripts/train.py -c $PIDML_TRAINING_DIR/scripts/train_default_cfg.json
+# export to onnx
+$PIDML_TRAINING_DIR/scripts/export_onnx.py 
 exit
 
 # TODO: training

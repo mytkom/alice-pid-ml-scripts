@@ -98,7 +98,6 @@ def main(cfg_file: str = None):
         },
         "Proposed": {
             "data_preparation":
-            # DeletePreparation(),
                 FeatureSetPreparation(),
             "config": {
                 "embed_in": N_COLUMNS + 1,
@@ -127,13 +126,13 @@ def main(cfg_file: str = None):
         },
     }
 
-    do_train("Delete", device, config_common, **EXPERIMENTS["Delete"])
+#    do_train("Delete", device, config_common, **EXPERIMENTS["Delete"])
 
-    do_train("Mean", device, config_common, **EXPERIMENTS["Mean"])
+#    do_train("Mean", device, config_common, **EXPERIMENTS["Mean"])
 
-    do_train("Regression", device, config_common, **EXPERIMENTS["Regression"])
+#    do_train("Regression", device, config_common, **EXPERIMENTS["Regression"])
 
-    do_train("Ensemble", device, config_common, **EXPERIMENTS["Ensemble"])
+#    do_train("Ensemble", device, config_common, **EXPERIMENTS["Ensemble"])
 
     do_train("Proposed", device, config_common, **EXPERIMENTS["Proposed"])
 
