@@ -7,9 +7,9 @@ import torch
 import onnx
 
 def main(input_dir: str, output_dir: str):
-    if (input_dir is None):
+    if input_dir is None:
         input_dir = "models"
-    if (output_dir is None):
+    if output_dir is None:
         output_dir = "onnx"
     from pdi.constants import (
         PARTICLES_DICT,
@@ -26,11 +26,11 @@ def main(input_dir: str, output_dir: str):
     (train_loader, ) = data_preparation.prepare_dataloaders(1, 0, [Split.TEST])
 
     input_data, _, data_dict = next(iter(train_loader))
-    print(input_data)
     gid = data_dict.get(GROUP_ID_KEY)
 
     dummy_input = input_data.to(device)
-    print(dummy_input.shape)
+    print("Example data shape for exporting:")
+    print(list(dummy_input.shape))
 
     os.makedirs(f"{output_dir}", exist_ok=True)
     for target_code in TARGET_CODES:
