@@ -7,13 +7,12 @@ import os
 import json
 import torch
 import torch.nn as nn
-import argparse
 
-def main(cfg_file: str = None):
-    
-    print(os.getcwd())
+def main(cfg_file: str = None, save_dir: str = None):
     if cfg_file is None:
         cfg_file = 'scripts/train_default_cfg.json'
+    if save_dir is None:
+        save_dir = 'models/'
     f = open(cfg_file)
     cfg = json.load(f)
 
@@ -28,75 +27,7 @@ def main(cfg_file: str = None):
     from pdi.models import AttentionModel, NeuralNetEnsemble, NeuralNet
     from pdi.data.constants import N_COLUMNS
 
-    EXPERIMENTS = {
-        "Delete": {
-            "data_preparation":
-                DeletePreparation(),
-            "config": {
-                "h0": 64,
-                "h1": 32,
-                "h2": 16,
-                "start_lr": 5e-4,
-            },
-            "model_class":
-                NeuralNet,
-            "model_args":
-                lambda d_prep: [[
-                    N_COLUMNS, wandb.config.h0, wandb.config.h1, wandb.config.h2, 1
-                ], nn.ReLU, wandb.config.dropout]
-        },
-        "Mean": {
-            "data_preparation":
-                MeanImputation(),
-            "config": {
-                "h0": 64,
-                "h1": 32,
-                "h2": 16,
-                "start_lr": 5e-4,
-            },
-            "model_class":
-                NeuralNet,
-            "model_args":
-                lambda d_prep: [[
-                    N_COLUMNS, wandb.config.h0, wandb.config.h1, wandb.config.h2, 1
-                ], nn.ReLU, wandb.config.dropout]
-        },
-        "Regression": {
-            "data_preparation":
-                RegressionImputation(),
-            "config": {
-                "h0": 64,
-                "h1": 32,
-                "h2": 16,
-                "start_lr": 5e-4,
-            },
-            "model_class":
-                NeuralNet,
-            "model_args":
-                lambda d_prep: [[
-                    N_COLUMNS, wandb.config.h0, wandb.config.h1, wandb.config.h2, 1
-                ], nn.ReLU, wandb.config.dropout],
-        },
-        "Ensemble": {
-            "data_preparation":
-                EnsemblePreparation(),
-            "config": {
-                "h0": 64,
-                "h1": 32,
-                "h2": 16,
-                "start_lr": 5e-4,
-            },
-            "model_class":
-                NeuralNetEnsemble,
-            "model_args":
-                lambda d_prep: [
-                    d_prep.get_group_ids(),
-                    [wandb.config.h0, wandb.config.h1, wandb.config.h2, 1],
-                    nn.ReLU,
-                    wandb.config.dropout,
-                ],
-        },
-        "Proposed": {
+    MODEL = {
             "data_preparation":
                 FeatureSetPreparation(),
             "config": {
@@ -123,20 +54,12 @@ def main(cfg_file: str = None):
                     nn.ReLU,
                     wandb.config.dropout,
                 ],
-        },
-    }
+        }
 
-#    do_train("Delete", device, config_common, **EXPERIMENTS["Delete"])
+    do_train(device, save_dir, config_common, **MODEL)
 
-#    do_train("Mean", device, config_common, **EXPERIMENTS["Mean"])
 
-#    do_train("Regression", device, config_common, **EXPERIMENTS["Regression"])
-
-#    do_train("Ensemble", device, config_common, **EXPERIMENTS["Ensemble"])
-
-    do_train("Proposed", device, config_common, **EXPERIMENTS["Proposed"])
-
-def do_train(experiment_name, device, config_common,  data_preparation, config, model_class,
+def do_train(device, save_dir, config_common,  data_preparation, config, model_class,
              model_args):
     from pdi.train import train
     from pdi.constants import (
@@ -153,8 +76,8 @@ def do_train(experiment_name, device, config_common,  data_preparation, config, 
     thresholds_df_list = []
 
     for target_code in TARGET_CODES:
-        save_path = f"models/{experiment_name}/{PARTICLES_DICT[target_code]}.pt"
-        with wandb.init(project=experiment_name,
+        save_path = f"{save_dir}/{PARTICLES_DICT[target_code]}.pt"
+        with wandb.init(project="Proposed",
                         config=wandb_config,
                         name=PARTICLES_DICT[target_code],
                         anonymous="allow") as run:
@@ -165,7 +88,7 @@ def do_train(experiment_name, device, config_common,  data_preparation, config, 
             model_init_args = model_args(data_preparation)
             model = model_class(*model_init_args).to(device)
 
-            os.makedirs(f"models/{experiment_name}/", exist_ok=True)
+            os.makedirs(f"{save_dir}/", exist_ok=True)
             train(model, target_code, device, train_loader, val_loader,
                   pos_weight)
 
@@ -180,17 +103,18 @@ def do_train(experiment_name, device, config_common,  data_preparation, config, 
             torch.save(save_dict, save_path)
 
     thresholds_df = pd.concat(thresholds_df_list, ignore_index=True)
-    thresholds_df.to_csv(f"models/{experiment_name}/thresholds.csv", index=False)
+    thresholds_df.to_csv(f"{save_dir}/thresholds.csv", index=False)
+
+import argparse
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train models.")
     parser.add_argument('-p', '--pdi-dir', dest="pdi_dir", type=str, help="Path to directory containing pdi source code")
     parser.add_argument('-c', '--config', dest="cfg_file", type=str, help="Configuration file.")
-    # parser.add_argument('-o', '--output', type=str, dest="output_dir", help="Output dir name.")
+    parser.add_argument('-s', '--save-dir', dest="save_dir", type=str, help="Save directory for models.")
     args = parser.parse_args()
 
     if args.pdi_dir not in sys.path:
         sys.path.append(args.pdi_dir)
 
-    main(args.cfg_file)
-
+    main(args.cfg_file, args.save_dir)

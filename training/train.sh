@@ -24,6 +24,5 @@ $PIDML_TRAINING_DIR/scripts/train.py -c $PIDML_TRAINING_DIR/scripts/train_defaul
 $PIDML_TRAINING_DIR/scripts/export_onnx.py 
 exit
 
-# TODO: training
 # TODO: data clean up
 # TODO: run benchmark task (generate graphs)

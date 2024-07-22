@@ -8,7 +8,7 @@ import onnx
 
 def main(input_dir: str, output_dir: str):
     if (input_dir is None):
-        input_dir = "models/Proposed"
+        input_dir = "models"
     if (output_dir is None):
         output_dir = "onnx"
     from pdi.constants import (
@@ -56,7 +56,4 @@ if __name__ == "__main__":
     if args.pdi_dir not in sys.path:
         sys.path.append(args.pdi_dir)
 
-    print(args.pdi_dir)
-    print(args.input_dir)
-    print(args.output_dir)
     main(args.input_dir, args.output_dir)
