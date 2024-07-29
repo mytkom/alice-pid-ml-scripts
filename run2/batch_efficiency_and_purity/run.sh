@@ -4,7 +4,8 @@
 export alien_CLOSE_SE=ALICE::GSI::SE2
 
 config_file="my-dpl-config.json"
-FILENAME=AO2D_18G4_run285064_023
+AO2DS_DIR=/wd/alice/AODs
+FILENAME=LHC18g4_285064_002
 
 o2-analysis-tracks-extra-converter --configuration json://$config_file -b |
 o2-analysis-timestamp --configuration json://$config_file -b |
@@ -19,6 +20,6 @@ o2-analysis-pid-tof-beta --configuration json://$config_file -b |
 o2-analysis-pid-tof-full --configuration json://$config_file -b |
 o2-analysis-pid-tpc-full --configuration json://$config_file -b |
 o2-analysis-pid-tpc-base --configuration json://$config_file -b |
-o2-analysis-pid-ml-batch-eff-and-pur-producer --aod-file $AO2DS_DIR/$FILENAME.root --configuration json://$config_file -b \
+o2-analysis-pid-ml-batch-eff-and-pur-producer --severity debug --aod-file $AO2DS_DIR/$FILENAME.root --configuration json://$config_file -b \
   --aod-writer-keep AOD/PIDEFFANDPURRES/0:::PID_RESULTS_$FILENAME
 mv AnalysisResults.root MC_HISTS_$FILENAME.root

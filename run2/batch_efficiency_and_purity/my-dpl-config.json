@@ -7,16 +7,10 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "@/home/wildjellybear/alice/alice-pid-ml-scripts/training/data/local_ao2ds_list.txt"
+        "aod-file": "\/wd\/alice\/AODs\/LHC18g4_285064_002.root"
     },
     "internal-dpl-aod-spawner": "",
-    "collision-converter": {
-        "doNotSwap": "false",
-        "debug": "false",
-        "nbins": "1",
-        "tolerance": "0.00100000005"
-    },
-    "bc-converter": "",
+    "fdd-converter": "",
     "timestamp-task": {
         "verbose": "false",
         "rct-path": "RCT\/Info\/RunInformation",
@@ -24,9 +18,8 @@
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
         "isRun2MC": "true"
     },
-    "tracks-extra-converter": "",
-    "zdc-converter": "",
     "internal-dpl-aod-index-builder": "",
+    "tracks-extra-converter": "",
     "tracks-extra-spawner": "",
     "multiplicity-table": {
         "doVertexZeq": "1",
@@ -101,19 +94,7 @@
         "processRun2": "true",
         "processRun3": "false",
         "processGlobalTrackingCounters": "false",
-        "processMC": "true"
-    },
-    "pid-multiplicity": {
-        "processIU": "false",
-        "processStandard": "true"
-    },
-    "tof-signal": {
-        "processRun3": "false",
-        "processRun2": "true"
-    },
-    "track-extension":  {
-          "processRun3": "false",
-          "processRun2": "true"
+        "processMC": "false"
     },
     "tpc-pid-full": {
         "param-file": "",
@@ -137,6 +118,14 @@
         "pid-tr": "-1",
         "pid-he": "-1",
         "pid-al": "-1"
+    },
+    "tof-signal": {
+        "processRun3": "false",
+        "processRun2": "true"
+    },
+    "track-extension":  {
+        "processRun3": "false",
+        "processRun2": "true"
     },
     "tof-event-time": {
         "minMomentum": "0.5",
@@ -236,11 +225,24 @@
         "fatalOnPassNotAvailable": "true",
         "enableTOFParams": "false"
     },
-    "pid-ml-producer-mc": {
-        "processML": "false",
-        "processAll": "true"
+    "pid-ml-batch-eff-and-pur-producer": {
+        "pids": {
+            "values": [
+                "211",
+                "321",
+                "2212",
+                "-211",
+                "-321",
+                "-2212"
+            ]
+        },
+        "ccdb-path": "Users\/m\/mkabus\/PIDML",
+        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
+        "use-ccdb": "false",
+        "local-path": "\/wd\/alice\/pdi\/onnx\/Proposed",
+        "use-fixed-timestamp": "false",
+        "timestamp": "1524176895000"
     },
     "internal-dpl-aod-writer": "",
-    "internal-dpl-aod-global-analysis-file-sink": "",
     "internal-dpl-injected-dummy-sink": ""
 }

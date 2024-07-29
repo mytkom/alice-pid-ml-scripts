@@ -1,0 +1,10 @@
+{
+  "common": {
+    "bs": 512,
+    "max_epochs": 40,
+    "dropout": 0.1,
+    "gamma": 0.9,
+    "patience": 5,
+    "patience_threshold": 0.001
+  }
+}

@@ -175,7 +175,7 @@ void generate_hists(const char* aodFilePath, const char* histFilePath, float cer
 
         TH1F* h_mc_tracked = (TH1F*) histFile.Get(mcTrackedHistLabels[i].data());
         TH1F* h_mc_positive = (TH1F*) histFile.Get(mcPositiveHistLabels[i].data());
-        
+
         // Draw histograms
         TCanvas c1("c1", "PID Efficiency and Purity", 1000, 1800);
         c1.Divide(1, 3);
@@ -228,17 +228,17 @@ void generate_hists(const char* aodFilePath, const char* histFilePath, float cer
         // Full Efficiency
         c1.cd(3);
 
-        auto h_recon_eff = h_mc_tracked; 
+        auto h_recon_eff = h_mc_tracked;
         h_recon_eff->Sumw2();
         h_recon_eff->Divide(h_mc_positive);
         draw_hist(h_recon_eff, contextStyle, contextColor, "Full Efficiency", ptTitle.data(), "Efficiency", 0.0, maxPt, 0.0, 1.0, "hist,same,pl");
 
-        auto h_ml_full_eff = (TH1F*)h_ml_tp[i]->Clone(); 
+        auto h_ml_full_eff = (TH1F*)h_ml_tp[i]->Clone();
         h_ml_full_eff->Sumw2();
         h_ml_full_eff->Divide(h_mc_positive);
         draw_hist(h_ml_full_eff, mlStyle, mlColor, "Full Efficiency", ptTitle.data(), "Efficiency", 0.0, maxPt, 0.0, 1.0, "hist,same,pl");
 
-        auto h_ns_full_eff = (TH1F*)h_ns_tp[i]->Clone(); 
+        auto h_ns_full_eff = (TH1F*)h_ns_tp[i]->Clone();
         h_ns_full_eff->Sumw2();
         h_ns_full_eff->Divide(h_mc_positive);
         draw_hist(h_ns_full_eff, nsStyle, nsColor, "Full Efficiency", ptTitle.data(), "Efficiency", 0.0, maxPt, 0.0, 1.0, "hist,same,pl");

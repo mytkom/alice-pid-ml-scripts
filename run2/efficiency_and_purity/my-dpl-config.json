@@ -7,7 +7,7 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "/root/alice/AO2Ds/AO2D_18G4_run285064_002.root"
+        "aod-file": "/wd/alice/AODs/LHC18g4_285064_030.root"
     },
     "internal-dpl-aod-spawner": "",
     "fdd-converter": "",
@@ -226,14 +226,13 @@
         "enableTOFParams": "false"
     },
     "pid-ml-eff-and-pur-producer": {
-        "detector": "2",
         "pid": "2212",
-        "certainty": "0.1",
+        "certainty": "0.4",
         "n-sigma-cut": "3",
         "ccdb-path": "Users\/m\/mkabus\/PIDML",
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
         "useCCDB": "false",
-        "local-path": "\/home\/mytkom\/pdi\/onnx\/Proposed",
+        "local-path": "\/wd\/alice\/pdi\/onnx\/0999Attention",
         "use-fixed-timestamp": "false",
         "timestamp": "1524176895000"
     },
