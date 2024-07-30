@@ -7,7 +7,7 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "\/wd\/alice\/AODs\/LHC18g4_285064_002.root"
+        "aod-file": "\/wd\/alice\/AODs\/alice-sim-2024-LHC24b1b-0-528461-AOD-034-AO2D.root"
     },
     "internal-dpl-aod-spawner": "",
     "fdd-converter": "",
@@ -16,11 +16,82 @@
         "rct-path": "RCT\/Info\/RunInformation",
         "orbit-reset-path": "CTP\/Calib\/OrbitReset",
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
-        "isRun2MC": "true"
+        "isRun2MC": "false"
     },
+    "track-propagation": "",
     "internal-dpl-aod-index-builder": "",
-    "tracks-extra-converter": "",
-    "tracks-extra-spawner": "",
+    "bc-selection-task": {
+        "triggerBcShift": "999",
+        "processRun2": "false",
+        "processRun3": "true"
+    },
+    "track-selection": {
+        "isRun3": "true",
+        "produceTable": "-1",
+        "produceFBextendedTable": "-1",
+        "compatibilityIU": "false",
+        "itsMatching": "0",
+        "dcaSetup": "0",
+        "ptMin": "0.100000001",
+        "ptMax": "1e+10",
+        "etaMin": "-0.800000012",
+        "etaMax": "0.800000012"
+    },
+    "pid-multiplicity": {
+        "processIU": "false",
+        "processStandard": "true"
+    },
+    "tof-signal": {
+        "processRun3": "true",
+        "processRun2": "false"
+    },
+    "tpc-pid-full": {
+        "param-file": "",
+        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
+        "ccdbPath": "Analysis\/PID\/TPC\/Response",
+        "ccdb-timestamp": "0",
+        "useNetworkCorrection": "false",
+        "autofetchNetworks": "true",
+        "networkPathLocally": "network.onnx",
+        "networkPathCCDB": "Analysis\/PID\/TPC\/ML",
+        "enableNetworkOptimizations": "true",
+        "networkSetNumThreads": "0",
+        "pid-el": "-1",
+        "pid-mu": "-1",
+        "pid-pi": "-1",
+        "pid-ka": "-1",
+        "pid-pr": "-1",
+        "pid-de": "-1",
+        "pid-tr": "-1",
+        "pid-he": "-1",
+        "pid-al": "-1"
+    },
+    "event-selection-task": {
+        "syst": "pp",
+        "muonSelection": "0",
+        "customDeltaBC": "0",
+        "isMC": "true",
+        "processRun2": "false",
+        "processRun3": "true"
+    },
+    "tof-event-time": {
+        "minMomentum": "0.5",
+        "maxMomentum": "2",
+        "maxEvTimeTOF": "100000",
+        "paramFileName": "",
+        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
+        "parametrizationPath": "TOF\/Calib\/Params",
+        "passName": "",
+        "ccdb-timestamp": "-1",
+        "loadResponseFromCCDB": "false",
+        "fatalOnPassNotAvailable": "true",
+        "sel8TOFEvTime": "false",
+        "maxNtracksInSet": "10",
+        "processRun2": "false",
+        "processNoFT0": "true",
+        "processFT0": "false",
+        "processOnlyFT0": "false"
+    },
     "multiplicity-table": {
         "doVertexZeq": "1",
         "fractionOfEvents": "2",
@@ -91,77 +162,22 @@
         },
         "ccdburl": "http:\/\/alice-ccdb.cern.ch",
         "ccdbpath": "Centrality\/Calibration",
-        "processRun2": "true",
-        "processRun3": "false",
+        "processRun2": "false",
+        "processRun3": "true",
         "processGlobalTrackingCounters": "false",
-        "processMC": "false"
+        "processMC": "true"
     },
-    "tpc-pid-full": {
-        "param-file": "",
-        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
-        "ccdbPath": "Analysis\/PID\/TPC\/Response",
-        "recoPass": "",
-        "ccdb-timestamp": "0",
-        "useNetworkCorrection": "false",
-        "autofetchNetworks": "true",
-        "skipTPCOnly": "false",
-        "networkPathLocally": "network.onnx",
-        "networkPathCCDB": "Analysis\/PID\/TPC\/ML",
-        "enableNetworkOptimizations": "true",
-        "networkSetNumThreads": "0",
-        "pid-el": "-1",
-        "pid-mu": "-1",
-        "pid-pi": "-1",
-        "pid-ka": "-1",
-        "pid-pr": "-1",
-        "pid-de": "-1",
-        "pid-tr": "-1",
-        "pid-he": "-1",
-        "pid-al": "-1"
-    },
-    "tof-signal": {
-        "processRun3": "false",
-        "processRun2": "true"
-    },
-    "track-extension":  {
-        "processRun3": "false",
-        "processRun2": "true"
-    },
-    "tof-event-time": {
-        "minMomentum": "0.5",
-        "maxMomentum": "2",
-        "maxEvTimeTOF": "100000",
-        "paramFileName": "",
-        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
-        "parametrizationPath": "TOF\/Calib\/Params",
-        "passName": "",
-        "ccdb-timestamp": "-1",
-        "loadResponseFromCCDB": "false",
-        "fatalOnPassNotAvailable": "true",
-        "sel8TOFEvTime": "false",
-        "maxNtracksInSet": "10",
-        "processRun2": "true",
-        "processNoFT0": "false",
-        "processFT0": "false",
-        "processOnlyFT0": "false"
-    },
-    "track-selection": {
-        "isRun3": "false",
-        "produceTable": "-1",
-        "produceFBextendedTable": "-1",
-        "compatibilityIU": "false",
-        "itsMatching": "0",
-        "dcaSetup": "0",
-        "ptMin": "0.100000001",
-        "ptMax": "1e+10",
-        "etaMin": "-0.800000012",
-        "etaMax": "0.800000012"
+    "centrality-table": {
+        "ccdburl": "http:\/\/alice-ccdb.cern.ch",
+        "ccdbpath": "Centrality\/Estimators",
+        "doNotCrashOnNull": "false",
+        "processRun2": "false",
+        "processRun3": "true"
     },
     "tof-pid-full": {
         "paramFileName": "",
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
         "parametrizationPath": "TOF\/Calib\/Params",
-        "timeShiftCCDBPath": "",
         "passName": "",
         "ccdb-timestamp": "-1",
         "loadResponseFromCCDB": "false",
@@ -239,7 +255,7 @@
         "ccdb-path": "Users\/m\/mkabus\/PIDML",
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
         "use-ccdb": "false",
-        "local-path": "\/wd\/alice\/pdi\/onnx\/vec_with_nans_sigmoid_included_in_model",
+        "local-path": "\/wd\/alice\/pdi\/onnx\/run3_9",
         "use-fixed-timestamp": "false",
         "timestamp": "1524176895000"
     },

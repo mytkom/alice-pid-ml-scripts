@@ -1,9 +1,9 @@
 #!/bin/bash
 
 script="generate_hists.cpp"
-histFile="MC_HISTS_LHC18g4_285064_002.root"
-aodFile="PID_RESULTS_LHC18g4_285064_002.root"
-dir="/wd/alice/alice-pid-ml-scripts/batch_efficiency_and_purity/vec_with_nans_sigmoid_included_in_model_graphs"
+histFile="MC_HISTS_alice-sim-2024-LHC24b1b-0-528461-AOD-034-AO2D.root"
+aodFile="PID_RESULTS_alice-sim-2024-LHC24b1b-0-528461-AOD-034-AO2D.root"
+dir="/wd/alice/alice-pid-ml-scripts/batch_efficiency_and_purity/run3-9-AODs"
 
 mkdir -p "$dir"
 
