@@ -16,7 +16,7 @@ def main(input_files, output_filepath):
             dirname = dirname.decode("utf-8")
             pure_dirname = dirname.split(";")[0]
             if pure_dirname.startswith("DF_"):
-                tree_data = file["%s/O2pidtracksmc" % (dirname)].pandas.df()
+                tree_data = file["%s/O2pidtracksmcml" % (dirname)].pandas.df()
                 dataframes.append(tree_data)
 
     data = pd.concat(dataframes, ignore_index=True)

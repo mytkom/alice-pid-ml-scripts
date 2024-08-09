@@ -7,7 +7,7 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "/wd/alice/AODs/AO2D_18G4_run285064_023.root"
+        "aod-file": "@/wd/alice/alice-pid-ml-scripts/run2/training/data/local_ao2ds_list.txt"
     },
     "internal-dpl-aod-spawner": "",
     "collision-converter": {
