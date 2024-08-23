@@ -23,13 +23,8 @@ def main(input_files, output_filepath):
     print(data.head())
     print(data.columns)
 
-    # p = np.sqrt(data.fPx ** 2 + data.fPy ** 2 + data.fPz ** 2)
-    # data["P"] = p
-    tof_missing = np.isclose(data["fBeta"], -999)
-    data["fBeta"].mask(tof_missing, inplace=True)
-    data["fTOFSignal"].mask(tof_missing, inplace=True)
+    # TRDPattern is uint8, so cannot use NaN in producer -> need to preprocess it here
     data["fTRDPattern"].mask(np.isclose(data["fTRDPattern"], 0), inplace=True)
-    data["fTRDSignal"].mask(np.isclose(data["fTRDSignal"], -999), inplace=True)
     data = data[data["fTPCSignal"] > 0]
 
     data.to_csv(output_filepath)

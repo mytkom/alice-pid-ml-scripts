@@ -5,7 +5,7 @@ export alien_CLOSE_SE=ALICE::GSI::SE2
 
 config_file="my-dpl-config.json"
 AO2DS_DIR=/wd/alice/AODs
-FILENAME=LHC18g4_285064_002
+FILENAME=LHC18g4_285064_030
 
 o2-analysis-tracks-extra-converter --configuration json://$config_file -b |
 o2-analysis-timestamp --configuration json://$config_file -b |
