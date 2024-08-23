@@ -7,7 +7,7 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "\/wd\/alice\/AODs\/LHC18g4_285064_002.root"
+        "aod-file": "\/wd\/alice\/AODs\/LHC18g4_285064_030.root"
     },
     "internal-dpl-aod-spawner": "",
     "fdd-converter": "",
@@ -239,7 +239,7 @@
         "ccdb-path": "Users\/m\/mkabus\/PIDML",
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
         "use-ccdb": "false",
-        "local-path": "\/wd\/alice\/pdi\/onnx\/Proposed",
+        "local-path": "\/wd\/alice\/pdi\/onnx\/vec_with_nans_sigmoid_included_in_model",
         "use-fixed-timestamp": "false",
         "timestamp": "1524176895000"
     },

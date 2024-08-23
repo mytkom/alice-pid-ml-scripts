@@ -67,7 +67,7 @@
         "produceTable": "-1",
         "produceFBextendedTable": "-1",
         "compatibilityIU": "false",
-        "itsMatching": "0",
+        "itsMatching": "1",
         "dcaSetup": "0",
         "ptMin": "0.100000001",
         "ptMax": "1e+10",
@@ -300,9 +300,9 @@
         "enableTOFParams": "false"
     },
     "pid-ml-producer": {
-        "processDataML": "true",
+        "processDataML": "false",
         "processDataAll": "false",
-        "processMcMl": "false",
+        "processMcMl": "true",
         "processMcAll": "false"
     },
     "internal-dpl-aod-writer": "",

@@ -48,6 +48,12 @@ constexpr int contextStyle = 21, contextColor = 30;
 constexpr int mlStyle = 20, mlColor = 38;
 constexpr int nsStyle = 20, nsColor = 46;
 
+enum TrackSet {
+  WithoutTOF,
+  WithTOF,
+  All
+};
+
 void extract_ttrees(TDirectoryFile* dir, std::vector<TTree*>& trees) {
     TList* keys = dir->GetListOfKeys();
     TIter next(keys);
@@ -84,7 +90,7 @@ void draw_hist(TH1* hist, int markerStyle, int color, const char* title, const c
     hist->Draw(drawOption);
 }
 
-void generate_hists(const char* aodFilePath, const char* histFilePath, float certaintyThreshold, float nSigmaThreshold, const char* saveDir = ".") {
+void generate_hists(const char* aodFilePath, const char* histFilePath, float certaintyThreshold, float nSigmaThreshold, const char* saveDir = ".", TrackSet trackSet = All) {
     TFile aodFile(aodFilePath, "READ");
 
     if (aodFile.IsZombie()) {
@@ -123,19 +129,27 @@ void generate_hists(const char* aodFilePath, const char* histFilePath, float cer
     for (TTree* tree : trees) {
         int pid;
         float mlCertainty;
-        bool isPidMC;
         float pt;
         float nSigma;
+        bool isPidMC;
+        bool hasTOF;
 
         tree->SetBranchAddress("fPid", &pid);
         tree->SetBranchAddress("fMlCertainty", &mlCertainty);
-        tree->SetBranchAddress("fIsPidMC", &isPidMC);
         tree->SetBranchAddress("fPt", &pt);
         tree->SetBranchAddress("fNSigma", &nSigma);
+        tree->SetBranchAddress("fIsPidMC", &isPidMC);
+        tree->SetBranchAddress("fHasTOF", &hasTOF);
 
         Long64_t nentries = tree->GetEntries();
         for (Long64_t i = 0; i < nentries; ++i) {
             tree->GetEntry(i);
+            if (
+              (trackSet == WithoutTOF && hasTOF) ||
+              (trackSet == WithTOF && !hasTOF)
+            ) {
+              continue;
+            }
             for (size_t j = 0; j < pidsCount; ++j) {
                 int searchedPid = pids[j];
                 if (pid == searchedPid) {
@@ -175,6 +189,12 @@ void generate_hists(const char* aodFilePath, const char* histFilePath, float cer
 
         TH1F* h_mc_tracked = (TH1F*) histFile.Get(mcTrackedHistLabels[i].data());
         TH1F* h_mc_positive = (TH1F*) histFile.Get(mcPositiveHistLabels[i].data());
+
+        if(h_mc_tracked == nullptr || h_mc_positive == nullptr) {
+          std::cout << "There is no histogram for: " << searchedPid << std::endl;
+          std::cout << "\tskipping..." << std::endl;
+          continue;
+        }
 
         // Draw histograms
         TCanvas c1("c1", "PID Efficiency and Purity", 1000, 1800);
